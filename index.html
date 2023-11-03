@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Robo Racer</title>
+  <style>
+    canvas {
+      background-color: #333;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="800" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Define player's robot
+    const player = {
+      x: 50,
+      y: canvas.height / 2,
+      width: 30,
+      height: 30,
+      speed: 5,
+    };
+
+    // Handle player controls
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowUp") {
+        player.y -= player.speed;
+      } else if (event.key === "ArrowDown") {
+        player.y += player.speed;
+      }
+    });
+
+    // Main game loop
+    function update() {
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw player's robot
+      ctx.fillStyle = "#00FF00";
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+
+      // Call the update function again
+      requestAnimationFrame(update);
+    }
+
+    // Start the game loop
+    update();
+  </script>
+</body>
+</html>
